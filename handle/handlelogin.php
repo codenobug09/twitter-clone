@@ -1,47 +1,47 @@
-<?php 
+<?php
 include '../core/init.php';
 require_once '../core/classes/validation/Validator.php';
+
 use validation\Validator;
 
+if (!isset($_POST['login'])) {
+    header('Location: ../home.php');
+    exit;
+}
 
-    
-    
+$email = trim($_POST['email'] ?? '');
+$password = trim($_POST['password'] ?? '');
 
-   if (isset($_POST['login']) && !empty($_POST['login'])) {
-    
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        if(!empty($email) && !empty($password)) {
-        $email = User::checkInput($email);
-        $password = User::checkInput($password); 
-       } 
-       
-          
+/* ===== VALIDATION ===== */
+$v = new Validator();
+$v->rules('email', $email, ['required', 'email']);
+$v->rules('password', $password, ['required', 'string']);
 
-        $v = new Validator; 
-        $v->rules('email' , $email , ['required' , 'email']);
-        $v->rules('password' , $password , ['required' , 'string']);
-        $errors = $v->errors;
-        if($errors == []) {
-            User::login($email , $password);
-         if(User::login($email , $password) === false ) {
-          // $errors = 'the email or password is not correct';/
-           $_SESSION['errors'] = ['the email or password is not correct'];
-           header('location: ../index.php')  ;
-         }
+if (!empty($v->errors)) {
+    $_SESSION['errors'] = $v->errors;
+    header("Location: /index.php");
+    exit;
+}
 
-        } else {
-          $_SESSION['errors'] = $errors;
-          header('location: ../index.php')  ;
-        }
+/* ===== CHECK USER ===== */
+$user = User::findByEmail($email);
 
+if (!$user) {
+    $_SESSION['errors'] = ['Email hoặc mật khẩu không đúng'];
+    header("Location: /index.php");
+    exit;
+}
 
-        
-            
-
-   } else  header('location: ../index.php')  ;
+/* ===== VERIFY PASSWORD HASH ===== */
+if ($password !== $user['password']) {
+    $_SESSION['errors'] = ['Email hoặc mật khẩu không đúng'];
+    header("Location: /index.php");
+    exit;
+}
 
 
-
-
-?>
+/* ===== LOGIN SUCCESS ===== */
+$_SESSION['user_id'] = $user['id'];
+$_SESSION['user_email'] = $user['email'];
+header("Location: /home.php");
+exit;
