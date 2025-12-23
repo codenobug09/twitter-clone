@@ -1,0 +1,139 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f5f8fa;
+  color: #0f1419;
+}
+
+.page-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+.page-container h1 {
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.page-container p {
+  color: #536471;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid #e6ecf0;
+  padding: 32px 20px 16px;
+  color: #536471;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1d9bf0;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: #536471;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #1d9bf0;
+}
+
+.footer-social a {
+  margin-left: 14px;
+  color: #536471;
+  font-size: 16px;
+}
+
+.footer-social a:hover {
+  color: #1d9bf0;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 24px;
+  color: #8899a6;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== DARK MODE ===== */
+body.dark {
+  background: #0f1419;
+  color: black;
+}
+
+body.dark .page-container p {
+  color: white;
+}
+
+body.dark footer {
+  background: #0f1419;
+  border-top: 1px solid #2f3336;
+}
+
+body.dark a {
+  color: #1d9bf0;
+}
+
+body.dark .features, body.dark header {
+    background: black;
+    color: white;
+}
+/* ===== DARK TOGGLE BUTTON ===== */
+.dark-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1d9bf0;
+  color: #fff;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
