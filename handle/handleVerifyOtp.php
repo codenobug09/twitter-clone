@@ -1,6 +1,7 @@
 <?php
 session_start();
-require "../../twitter-clone-v3/core/database/connection.php";
+require_once __DIR__ . '/../core/database/connection.php';
+
 
 if (!isset($_SESSION['otp'], $_SESSION['signup_data'])) {
 
@@ -49,5 +50,5 @@ unset($_SESSION['otp'], $_SESSION['otp_expire'], $_SESSION['signup_data']);
 
 <script>
     alert("Đăng ký thành công! Vui lòng đăng nhập.");
-    window.location.href = "../home.php";
+    window.location.href = "../index.php";
 </script>
