@@ -71,7 +71,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
     public static function isRetweet($tweet_id)
     {
@@ -83,25 +84,26 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     public static function getTimeAgo($timestamp)
     {
         date_default_timezone_set("Africa/Cairo");
 
-        $time_ago        = strtotime($timestamp);
+        $time_ago = strtotime($timestamp);
         $current_time = strtotime(date("Y-m-d H:i:s"));
         // $current_time    = time();
         $time_difference = $current_time - $time_ago;
-        $seconds         = $time_difference;
+        $seconds = $time_difference;
 
         $minutes = round($seconds / 60); // value 60 is seconds  
-        $hours   = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec  
-        $days    = round($seconds / 86400); //86400 = 24 * 60 * 60;  
-        $weeks   = round($seconds / 604800); // 7*24*60*60;  
-        $months  = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60  
-        $years   = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
+        $hours = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec  
+        $days = round($seconds / 86400); //86400 = 24 * 60 * 60;  
+        $weeks = round($seconds / 604800); // 7*24*60*60;  
+        $months = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60  
+        $years = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
 
         if ($seconds <= 60) {
 
@@ -192,7 +194,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     public static function addTrend($hashtag)
@@ -277,7 +280,8 @@ class Tweet extends User
         if ($stmt->rowCount() > 0) {
             $count = $stmt->fetch(PDO::FETCH_OBJ);
             return $count->count;
-        } else return false;
+        } else
+            return false;
     }
 
     public static function unLike($user_id, $tweet_id)
@@ -291,7 +295,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     public static function userLikeIt($user_id, $tweet_id)
@@ -305,7 +310,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
     public static function usersLiked($tweet_id)
     {
@@ -330,7 +336,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
     public static function usersRetweeeted($tweet_id)
     {
@@ -356,7 +363,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
 
@@ -375,7 +383,8 @@ class Tweet extends User
 
         if ($stmt->rowCount() > 0) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     public static function retweetRealId($tweet_id, $user_id)
@@ -468,5 +477,14 @@ class Tweet extends User
             "INSERT INTO comments (user_id, post_id, comment) VALUES (?, ?, ?)"
         );
         $stmt->execute([$user_id, $tweet_id, $comment]);
+    }
+
+    public static function getTweetsByUser($user_id)
+    {
+        $stmt = self::connect()->prepare(
+            "SELECT * FROM posts WHERE user_id = ? ORDER BY id DESC"
+        );
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 }

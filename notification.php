@@ -65,15 +65,12 @@ if (User::checkLogIn() === false)
               <?php if ($notify_count > 0) { ?>
                 <i class="notify-count"><?php echo $notify_count; ?></i>
               <?php } ?>
-              <img
-                src="https://i.ibb.co/Gsr7qyX/notification.png"
-                alt=""
-                height="26.25px"
-                width="26.25px" />
+              <img src="https://i.ibb.co/Gsr7qyX/notification.png" alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
-              <a class="wrapper-left-active" href="notification.php" style="margin-top: 4px"><strong>Notification</strong></a>
+              <a class="wrapper-left-active" href="notification.php"
+                style="margin-top: 4px"><strong>Notification</strong></a>
             </div>
           </div>
         </a>
@@ -93,7 +90,9 @@ if (User::checkLogIn() === false)
         <a href="./account.php">
           <div class="grid-sidebar ">
             <div class="icon-sidebar-align">
-              <img src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="" height="26.25px" width="26.25px" />
+              <img
+                src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+                alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
@@ -121,24 +120,15 @@ if (User::checkLogIn() === false)
         <div class="box-user">
           <div class="grid-user">
             <div>
-              <img
-                src="assets/images/users/<?php echo $user->img ?>"
-                alt="user"
-                class="img-user" />
+              <img src="assets/images/users/<?php echo $user->img ?>" alt="user" class="img-user" />
             </div>
             <div>
               <p class="name"><strong><?php if ($user->name !== null) {
-                                        echo $user->name;
-                                      } ?></strong></p>
+                echo $user->name;
+              } ?></strong></p>
               <p class="username">@<?php echo $user->username; ?></p>
             </div>
-            <div class="mt-arrow">
-              <img
-                src="https://i.ibb.co/mRLLwdW/arrow-down.png"
-                alt=""
-                height="18.75px"
-                width="18.75px" />
-            </div>
+
           </div>
         </div>
       </div>
@@ -161,7 +151,8 @@ if (User::checkLogIn() === false)
           <div class="container">
             <div style="border-bottom: 1px solid #F5F8FA;" class="row position-fixed box-name">
               <div class="col-xs-2">
-                <a href="javascript: history.go(-1);"> <i style="font-size:20px;" class="fas fa-arrow-left arrow-style"></i> </a>
+                <a href="javascript: history.go(-1);"> <i style="font-size:20px;"
+                    class="fas fa-arrow-left arrow-style"></i> </a>
               </div>
               <div class="col-xs-10">
                 <p style="margin-top: 12px;" class="home-name"> Notifications</p>
@@ -169,69 +160,197 @@ if (User::checkLogIn() === false)
             </div>
 
           </div>
-          <div class="container mt-5">
+          <div class="notification-container mt-5">
 
-            <?php foreach ($notofication as $notify) {
+            <?php foreach ($notofication as $notify):
+
               $user = User::getData($notify->notify_from);
+              if (!$user)
+                continue;
+
               $timeAgo = Tweet::getTimeAgo($notify->time);
-            ?>
-              <?php if ($notify->type == 'like') {
-                $icon = "<i style='color: red;font-size:30px;' class='fa-heart  fas ml-2'></i>";
-                $msg = "Liked Your Tweet";
-              } else if ($notify->type == 'retweet') {
-                $icon = "<i style='font-size:30px;color: rgb(22, 207, 22);'  class='fas fa-retweet ml-2'></i>";
-                $msg = "Retweeted Your Tweet";
-              } else if ($notify->type == 'qoute') {
-                $icon = "<i style='font-size:30px;color: rgb(22, 207, 22);'  class='fas fa-retweet ml-2'></i>";
-                $msg = "Qouted Your Tweet";
-              } else if ($notify->type == 'comment') {
-                $icon = "<i style='font-size:30px;' class='far fa-comment ml-2'></i>";
-                $msg = "Comment to your Tweet";
-              } else if ($notify->type == 'reply') {
-                $icon = "<i style='font-size:30px;' class='far fa-comment ml-2'></i>";
-                $msg = "Reply to your Comment";
-              } else if ($notify->type == 'follow') {
-                $icon = "<i style='font-size:30px;' class='fas fa-user ml-2'></i>";
-                $msg = "Followed You";
-              } else if ($notify->type == 'mention') {
-                $icon = "<i style='font-size:30px;' class='fas fa-user ml-2'></i>";
-                $msg = "Mention you in Tweet";
-              } ?>
 
-              <div style="position: relative; border-bottom:4px solid #F5F8FA;" class="box-tweet py-3 ">
-                <a href="
-                        <?php if ($notify->type == 'follow') {
-                          echo $user->username;
-                        } else { ?>
-                            status/<?php echo $notify->target; ?>
-                        <?php } ?>  ">
-                  <span style="position:absolute; width:100%; height:100%; top:0;left: 0; z-index: 1;"></span>
+              switch ($notify->type) {
+                case 'like':
+                  $icon = "<i class='fas fa-heart'></i>";
+                  $msg = "liked your Tweet";
+                  $iconClass = "like";
+                  break;
+
+                case 'retweet':
+                  $icon = "<i class='fas fa-retweet'></i>";
+                  $msg = "retweeted your Tweet";
+                  $iconClass = "retweet";
+                  break;
+
+                case 'qoute':
+                  $icon = "<i class='fas fa-retweet'></i>";
+                  $msg = "quoted your Tweet";
+                  $iconClass = "retweet";
+                  break;
+
+                case 'comment':
+                  $icon = "<i class='far fa-comment'></i>";
+                  $msg = "commented on your Tweet";
+                  $iconClass = "comment";
+                  break;
+
+                case 'reply':
+                  $icon = "<i class='far fa-comment'></i>";
+                  $msg = "replied to your comment";
+                  $iconClass = "comment";
+                  break;
+
+                case 'follow':
+                  $icon = "<i class='fas fa-user'></i>";
+                  $msg = "followed you";
+                  $iconClass = "follow";
+                  break;
+
+                case 'mention':
+                  $icon = "<i class='fas fa-at'></i>";
+                  $msg = "mentioned you in a Tweet";
+                  $iconClass = "mention";
+                  break;
+              }
+
+              $avatar = $user->img ?? 'default.png';
+              ?>
+
+              <div class="notification-item">
+
+                <!-- Click toàn card -->
+                <a class="overlay-link" href="<?php echo ($notify->type === 'follow')
+                  ? '/profile/index.php?username=' . urlencode($user->username)
+                  : '/status/home.php?id=' . $notify->target; ?>">
                 </a>
-                <div class="grid-tweet">
-                  <div class="icon mt-2">
-                    <?php echo $icon; ?>
-                  </div>
-                  <div class="notify-user">
-                    <p>
-                      <a style="position: relative; z-index:1000;" href="<?php echo $user->username;  ?>">
-                        <img class="img-user" src="assets/images/users/<?php echo $user->img ?>" alt="">
-                      </a>
 
-                    </p>
-                    <p> <a style="font-weight: 700;
-                                    font-size:18px;
-                                    position: relative; z-index:1000;" href="<?php echo $user->username; ?>">
-                        <?php echo $user->name; ?> </a> <?php echo $msg; ?>
-                      <span style="font-weight: 500;" class="ml-3">
-                        <?php echo $timeAgo; ?>
-                      </span>
-                    </p>
+                <div class="icon <?= $iconClass ?>">
+                  <?= $icon ?>
+                </div>
+
+                <div class="content">
+                  <a class="avatar" href="/profile/index.php?username=<?= urlencode($user->username); ?>">
+                    <img src="/assets/images/users/<?= htmlspecialchars($avatar); ?>">
+                  </a>
+
+                  <div class="text">
+                    <a class="name" href="/profile/index.php?username=<?= urlencode($user->username); ?>">
+                      <?= htmlspecialchars($user->name); ?>
+                    </a>
+                    <span class="message"><?= $msg ?></span>
+                    <div class="time"><?= $timeAgo ?></div>
                   </div>
                 </div>
-              </div>
-            <?php  } ?>
-          </div>
 
+              </div>
+
+            <?php endforeach; ?>
+
+          </div>
+          <style>
+            /* ===== Notification Container ===== */
+            .notification-container {
+              max-width: 833px;
+            }
+
+            /* ===== Notification Item ===== */
+            .notification-item {
+              position: relative;
+              display: flex;
+              padding: 14px 16px;
+              border-bottom: 1px solid #e6ecf0;
+              cursor: pointer;
+              background: #fff;
+              transition: background 0.2s ease;
+            }
+
+            .notification-item:hover {
+              background: #f7f9fa;
+            }
+
+            /* Click toàn card */
+            .notification-item .overlay-link {
+              position: absolute;
+              inset: 0;
+              z-index: 1;
+            }
+
+            /* ===== Icon ===== */
+            .notification-item .icon {
+              width: 42px;
+              text-align: center;
+              font-size: 18px;
+              margin-right: 12px;
+            }
+
+            /* Icon màu theo type */
+            .notification-item .icon.like {
+              color: #e0245e;
+            }
+
+            .notification-item .icon.retweet {
+              color: #17bf63;
+            }
+
+            .notification-item .icon.comment {
+              color: #1da1f2;
+            }
+
+            .notification-item .icon.follow {
+              color: #794bc4;
+            }
+
+            .notification-item .icon.mention {
+              color: #1da1f2;
+            }
+
+            /* ===== Content ===== */
+            .notification-item .content {
+              display: flex;
+              gap: 10px;
+              z-index: 2;
+            }
+
+            /* Avatar */
+            .notification-item .avatar img {
+              width: 42px;
+              height: 42px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+
+            /* Text */
+            .notification-item .text {
+              display: flex;
+              flex-direction: column;
+              font-size: 14px;
+            }
+
+            /* Name */
+            .notification-item .name {
+              font-weight: 700;
+              color: #0f1419;
+              text-decoration: none;
+            }
+
+            .notification-item .name:hover {
+              text-decoration: underline;
+            }
+
+            /* Message */
+            .notification-item .message {
+              color: #536471;
+              margin-left: 4px;
+            }
+
+            /* Time */
+            .notification-item .time {
+              font-size: 12px;
+              color: #8899a6;
+              margin-top: 4px;
+            }
+          </style>
 
 
         </div>
@@ -259,34 +378,30 @@ if (User::checkLogIn() === false)
           foreach ($who_users as $user) {
             //  $u = User::getData($user->user_id);
             $user_follow = Follow::isUserFollow($user_id, $user->id);
-          ?>
+            ?>
             <div class="grid-share">
-              <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
-                <img
-                  src="assets/images/users/<?php echo $user->img; ?>"
-                  alt=""
-                  class="img-share" />
+              <a style="position: relative; z-index:5; color:black"
+                href="/profile.php?username=<?php echo $user->username; ?>">
+                <img src="assets/images/users/<?php echo $user->img; ?>" alt="" class="img-share" />
               </a>
               <div>
                 <p>
-                  <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
+                  <a style="position: relative; z-index:5; color:black"
+                    href="/profile.php?username=<?php echo $user->username; ?>">
                     <strong><?php echo $user->name; ?></strong>
                   </a>
                 </p>
                 <p class="username">@<?php echo $user->username; ?>
                   <?php if (Follow::FollowsYou($user->id, $user_id)) { ?>
                     <span class="ml-1 follows-you">Follows You</span>
+                  </p>
+                <?php } ?></p>
                 </p>
-              <?php } ?></p>
-              </p>
               </div>
               <div>
-                <button
-                  class="follow-btn follow-btn-m <?php echo $user_follow ? 'following' : 'follow'; ?>"
-                  data-follow="<?php echo $user->id; ?>"
-                  data-user="<?php echo $user_id; ?>"
-                  data-profile="<?php echo $profileData->id; ?>"
-                  style="font-weight:700;">
+                <button class="follow-btn follow-btn-m <?php echo $user_follow ? 'following' : 'follow'; ?>"
+                  data-follow="<?php echo $user->id; ?>" data-user="<?php echo $user_id; ?>"
+                  data-profile="<?php echo $profileData->id; ?>" style="font-weight:700;">
                   <?php echo $user_follow ? 'Following' : 'Follow'; ?>
                 </button>
               </div>

@@ -53,12 +53,15 @@ $comment_list = Tweet::getComments($tweet_id);
                     <span>@<?php echo $user->username; ?></span>
                     <span><?php echo $timeAgo; ?></span>
                 </p>
-
-                <p><?php echo Tweet::getTweetLinks($tweet->status); ?></p>
-
-                <?php if ($tweet->img): ?>
+                <?php
+                if (isset($tweet->status)) {
+                    ?>
+                    <p><?php echo $tweet->status; ?></p>
+                    <?php
+                } ?>
+                <?php if (isset($tweet->img)) { ?>
                     <img src="../assets/images/tweets/<?php echo $tweet->img; ?>" class="img-post-tweet">
-                <?php endif; ?>
+                <?php } ?>
             </div>
         </div>
 
@@ -84,7 +87,7 @@ $comment_list = Tweet::getComments($tweet_id);
     <div class="comments">
         <?php foreach ($comment_list as $c):
             $cu = User::getData($c->user_id);
-        ?>
+            ?>
             <div class="comment">
                 <strong><?php echo $cu->name; ?></strong>
                 <span>@<?php echo $cu->username; ?></span>
