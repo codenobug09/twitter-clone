@@ -143,7 +143,7 @@ else  $comment_count = Tweet::countComments($tweet->id);
 ?>
          
         <div class="box-tweet feed" style="position: relative;" >
-        <a href="status/<?php echo $tweet_link; ?>">
+        <a href="status/home.php?id=<?php echo $tweet_link; ?>">
         <span style="position:absolute; width:100%; height:100%; top:0;left: 0; z-index: 1;"></span>
         </a>
         <?php if ($retweet_sign) { ?>
@@ -189,7 +189,7 @@ else  $comment_count = Tweet::countComments($tweet->id);
 
         <div  class="mt-post-tweet comment-post" style="position: relative;">
 
-        <a href="status/<?php echo $tweet_inner->id; ?>">
+        <a  href="status/home.php?id=<?php echo $tweet_link; ?>">
         <span class="" style="position:absolute; width:100%; height:100%; top:0;left: 0; z-index: 2;"></span>
         </a>
         <div class="grid-tweet py-3 "  > 

@@ -1374,6 +1374,33 @@ border-radius: 10px;
 	
 } 
  
+.card {
+  border-radius: 16px;
+}
+
+.form-control-lg {
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.btn-primary {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.toggle-pass {
+  cursor: pointer;
+  background: #f8f9fa;
+}
+
+.alert {
+  border-radius: 12px;
+}
+
+.progress-bar {
+  transition: width 0.3s ease;
+}
+
 
 
 

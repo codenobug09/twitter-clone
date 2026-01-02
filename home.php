@@ -144,7 +144,7 @@ $notify_count = User::CountNotification($user_id);
         <a href="account.php">
           <div class="grid-sidebar ">
             <div class="icon-sidebar-align">
-              <img src="https://i.ibb.co/znTXjv6/perfil.png" alt="" height="26.25px" width="26.25px" />
+              <img src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
@@ -166,7 +166,7 @@ $notify_count = User::CountNotification($user_id);
           </div>
         </a>
         <button class="button-twittear">
-          <strong>Tweet</strong>
+          <strong><a href="./home.php">Tweet</a></strong>
         </button>
 
         <div class="box-user">

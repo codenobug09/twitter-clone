@@ -5,6 +5,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^status/([0-9_-]+)/?$ status.php?post_id=$1 [QSA]
 
 
+RewriteRule ^status/([0-9]+)$ status/home.php?id=$1 [L]
+RewriteRule ^profile/([a-zA-Z0-9_]+)$ profile/index.php?username=$1 [L]
+
 
 
 
