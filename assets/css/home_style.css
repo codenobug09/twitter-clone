@@ -350,11 +350,10 @@
 	font-size: 15px;
   }
   #mine .hover-reaction{
-	padding: 5px 0 5px 0;
-	height: 38px;
-	border-radius: 50%;
+	padding: 1px 18px 1px 8px;
+	height: 32px;
+	border-radius: 100%;
 	text-align: center;
-	padding-top: 5px;
   }
   #mine .hover-reaction-rep{
 	/* padding: 5px 0 5px 0; */
