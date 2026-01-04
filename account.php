@@ -61,11 +61,7 @@ if (User::checkLogIn() === false)
               <?php if ($notify_count > 0) { ?>
                 <i class="notify-count"><?php echo $notify_count; ?></i>
               <?php } ?>
-              <img
-                src="https://i.ibb.co/Gsr7qyX/notification.png"
-                alt=""
-                height="26.25px"
-                width="26.25px" />
+              <img src="https://i.ibb.co/Gsr7qyX/notification.png" alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
@@ -81,7 +77,8 @@ if (User::checkLogIn() === false)
             </div>
 
             <div class="wrapper-left-elements">
-              <a href="./profile.php?username=<?= urlencode($user->username) ?>" style="margin-top: 4px"><strong>Profile</strong></a>
+              <a href="./profile.php?username=<?= urlencode($user->username) ?>"
+                style="margin-top: 4px"><strong>Profile</strong></a>
 
             </div>
           </div>
@@ -89,7 +86,9 @@ if (User::checkLogIn() === false)
         <a href="./account.php">
           <div class="grid-sidebar ">
             <div class="icon-sidebar-align">
-              <img src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="" height="26.25px" width="26.25px" />
+              <img
+                src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+                alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
@@ -117,24 +116,15 @@ if (User::checkLogIn() === false)
         <div class="box-user">
           <div class="grid-user">
             <div>
-              <img
-                src="assets/images/users/<?php echo $user->img ?>"
-                alt="user"
-                class="img-user" />
+              <img src="assets/images/users/<?php echo $user->img ?>" alt="user" class="img-user" />
             </div>
             <div>
               <p class="name"><strong><?php if ($user->name !== null) {
-                                        echo $user->name;
-                                      } ?></strong></p>
+                echo $user->name;
+              } ?></strong></p>
               <p class="username">@<?php echo $user->username; ?></p>
             </div>
-            <div class="mt-arrow">
-              <img
-                src="https://i.ibb.co/mRLLwdW/arrow-down.png"
-                alt=""
-                height="18.75px"
-                width="18.75px" />
-            </div>
+
           </div>
         </div>
       </div>
@@ -156,37 +146,44 @@ if (User::checkLogIn() === false)
         <div class="box-home feed">
           <div class="container">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a style="color:black !important;" class="nav-link active text-center" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Change Email or Username</a>
-              <a style="color:black !important;" class="nav-link text-center" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</a>
+              <a style="color:black !important;" class="nav-link active text-center" id="v-pills-home-tab"
+                data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+                aria-selected="true">Change Email or Username</a>
+              <a style="color:black !important;" class="nav-link text-center" id="v-pills-profile-tab"
+                data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
+                aria-selected="false">Change Password</a>
 
             </div>
             <div class="tab-content" id="v-pills-tabContent">
-              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                aria-labelledby="v-pills-home-tab">
                 <!-- Change EMAIL and USAERNAME Form -->
 
                 <form method="POST" action="handle/handleAccountSetting.php" class="py-4">
 
                   <?php if (isset($_SESSION['errors_account'])) {
 
-                  ?>
+                    ?>
 
                     <?php foreach ($_SESSION['errors_account'] as $error) { ?>
 
                       <div class="alert alert-danger" role="alert">
                         <p style="font-size: 15px;" class="text-center"> <?php echo $error; ?> </p>
                       </div>
-                    <?php }   ?>
+                    <?php } ?>
 
                   <?php }
-                  unset($_SESSION['errors_account'])  ?>
+                  unset($_SESSION['errors_account']) ?>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" name="email" value="<?php echo $user->email; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" name="email" value="<?php echo $user->email; ?>" class="form-control"
+                      id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Username</label>
-                    <input type="text" name="username" value="<?php echo $user->username; ?>" class="form-control" id="exampleInputPassword1" placeholder="Username">
+                    <input type="text" name="username" value="<?php echo $user->username; ?>" class="form-control"
+                      id="exampleInputPassword1" placeholder="Username">
                   </div>
 
                   <div class="text-center">
@@ -289,11 +286,11 @@ if (User::checkLogIn() === false)
                   <script src="assets/js/jquery-3.5.1.min.js"></script>
                   <?php if (isset($_SESSION['errors_password'])) {
 
-                  ?>
+                    ?>
 
 
                     <script>
-                      $(document).ready(function() {
+                      $(document).ready(function () {
                         // Open modal on page load
                         $("#v-pills-profile-tab").click();
 
@@ -305,24 +302,27 @@ if (User::checkLogIn() === false)
                       <div class="alert alert-danger" role="alert">
                         <p style="font-size: 15px;" class="text-center"> <?php echo $error; ?> </p>
                       </div>
-                    <?php }   ?>
+                    <?php } ?>
 
                   <?php }
-                  unset($_SESSION['errors_password'])  ?>
+                  unset($_SESSION['errors_password']) ?>
 
                   <div class="form-group">
                     <label for="exampleInputEmail1">Old Password</label>
-                    <input type="password" name="old_password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Old Password">
+                    <input type="password" name="old_password" class="form-control" id="exampleInputEmail1"
+                      aria-describedby="emailHelp" placeholder="Old Password">
 
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">New Password</label>
-                    <input type="password" name="new_password" class="form-control" id="exampleInputPassword1" placeholder="New Password">
+                    <input type="password" name="new_password" class="form-control" id="exampleInputPassword1"
+                      placeholder="New Password">
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Verify Password</label>
-                    <input type="password" name="ver_password" class="form-control" id="exampleInputPassword1" placeholder="New Password">
+                    <input type="password" name="ver_password" class="form-control" id="exampleInputPassword1"
+                      placeholder="New Password">
                   </div>
 
                   <div class="text-center">
@@ -366,39 +366,35 @@ if (User::checkLogIn() === false)
           foreach ($who_users as $user) {
             //  $u = User::getData($user->user_id);
             $user_follow = Follow::isUserFollow($user_id, $user->id);
-          ?>
+            ?>
             <div class="grid-share">
-              <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
-                <img
-                  src="assets/images/users/<?php echo $user->img; ?>"
-                  alt=""
-                  class="img-share" />
+              <a style="position: relative; z-index:5; color:black"
+                href="/profile.php?username=<?php echo $user->username; ?>">
+                <img src="assets/images/users/<?php echo $user->img; ?>" alt="" class="img-share" />
               </a>
               <div>
                 <p>
-                  <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
+                  <a style="position: relative; z-index:5; color:black"
+                    href="/profile.php?username=<?php echo $user->username; ?>">
                     <strong><?php echo $user->name; ?></strong>
                   </a>
                 </p>
                 <p class="username">@<?php echo $user->username; ?>
                   <?php if (Follow::FollowsYou($user->id, $user_id)) { ?>
                     <span class="ml-1 follows-you">Follows You</span>
+                  </p>
+                <?php } ?></p>
                 </p>
-              <?php } ?></p>
-              </p>
               </div>
               <div>
                 <button class="follow-btn follow-btn-m 
-                      <?= $user_follow ? 'following' : 'follow' ?>"
-                  data-follow="<?php echo $user->id; ?>"
-                  data-user="<?php echo $user_id; ?>"
-                  data-profile="<?php echo $u_id; ?>"
-                  style="font-weight: 700;">
+                      <?= $user_follow ? 'following' : 'follow' ?>" data-follow="<?php echo $user->id; ?>"
+                  data-user="<?php echo $user_id; ?>" data-profile="<?php echo $u_id; ?>" style="font-weight: 700;">
                   <?php if ($user_follow) { ?>
                     Following
-                  <?php } else {  ?>
+                  <?php } else { ?>
                     Follow
-                  <?php }  ?>
+                  <?php } ?>
                 </button>
               </div>
             </div>
