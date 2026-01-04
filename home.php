@@ -40,7 +40,7 @@ $notify_count = User::CountNotification($user_id);
 
   <?php if (isset($_SESSION['welcome'])) { ?>
     <script>
-      $(document).ready(function() {
+      $(document).ready(function () {
         // Open modal on page load
         $("#welcome").modal('show');
 
@@ -50,13 +50,15 @@ $notify_count = User::CountNotification($user_id);
 
 
     <!-- Modal -->
-    <div class="modal fade" id="welcome" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="welcome" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="">
             <div class="text-center">
               <span class="modal-title font-weight-bold text-center" id="exampleModalLongTitle">
-                <span style="font-size: 20px;">Welcome <span style="color:#207ce5"><?php echo $user->name; ?></span> </span>
+                <span style="font-size: 20px;">Welcome <span style="color:#207ce5"><?php echo $user->name; ?></span>
+                </span>
               </span>
             </div>
             <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -72,7 +74,8 @@ $notify_count = User::CountNotification($user_id);
             <p>This is Twitter clone made by <span style="font-weight: 700;">Amin Yasser</span> for learning purpose.</p>
             <p>The clone includes tweet , retweet , qoute or even qoute the qouted tweet , like tweet and nested comments.
               you can mention or add hashtag to yout tweet , change password or username.
-              Follow or unfollow people. get notificaction if any action happen. Search users by name or username. and more!
+              Follow or unfollow people. get notificaction if any action happen. Search users by name or username. and
+              more!
             </p>
             <p>By Signing Up then you followed
               <a style="color:#207ce5;" href="amin">@amin</a>
@@ -84,7 +87,7 @@ $notify_count = User::CountNotification($user_id);
       </div>
     </div>
 
-  <?php unset($_SESSION['welcome']);
+    <?php unset($_SESSION['welcome']);
   } ?>
 
   <!-- End welcome -->
@@ -116,11 +119,7 @@ $notify_count = User::CountNotification($user_id);
               <?php if ($notify_count > 0) { ?>
                 <i class="notify-count"><?php echo $notify_count; ?></i>
               <?php } ?>
-              <img
-                src="https://i.ibb.co/Gsr7qyX/notification.png"
-                alt=""
-                height="26.25px"
-                width="26.25px" />
+              <img src="https://i.ibb.co/Gsr7qyX/notification.png" alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
@@ -136,7 +135,8 @@ $notify_count = User::CountNotification($user_id);
             </div>
 
             <div class="wrapper-left-elements">
-              <a href="./profile.php?username=<?= urlencode($user->username) ?>" style="margin-top: 4px"><strong>Profile</strong></a>
+              <a href="./profile.php?username=<?= urlencode($user->username) ?>"
+                style="margin-top: 4px"><strong>Profile</strong></a>
 
             </div>
           </div>
@@ -144,7 +144,9 @@ $notify_count = User::CountNotification($user_id);
         <a href="account.php">
           <div class="grid-sidebar ">
             <div class="icon-sidebar-align">
-              <img src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="" height="26.25px" width="26.25px" />
+              <img
+                src="https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2https://www.bing.com/th/id/OIP.Qs1NuFtNZmtxK8WJ7H4KjgHaHa?w=216&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+                alt="" height="26.25px" width="26.25px" />
             </div>
 
             <div class="wrapper-left-elements">
@@ -172,23 +174,15 @@ $notify_count = User::CountNotification($user_id);
         <div class="box-user">
           <div class="grid-user">
             <div>
-              <img
-                src="assets/images/users/<?php echo $user->img ?>"
-                alt="user"
-                class="img-user" />
+              <img src="assets/images/users/<?php echo $user->img ?>" alt="user" class="img-user" />
             </div>
             <div>
               <p class="name"><strong><?php if ($user->name !== null) {
-                                        echo $user->name;
-                                      } ?></strong></p>
+                ?>
+                    <a href="./profile.php?username=<?= urlencode($user->username) ?>"><?php echo $user->name; ?></a>
+                    <?php
+              } ?></strong></p>
               <p class="username">@<?php echo $user->username; ?></p>
-            </div>
-            <div class="mt-arrow">
-              <img
-                src="https://i.ibb.co/mRLLwdW/arrow-down.png"
-                alt=""
-                height="18.75px"
-                width="18.75px" />
             </div>
           </div>
         </div>
@@ -208,9 +202,6 @@ $notify_count = User::CountNotification($user_id);
                     <div class="home">
                       <h2>Home</h2>
                     </div>
-                    <!-- <div class="icon">
-                        <button type="button" name="button">+</button>
-                      </div> -->
                   </div>
 
                   <div class="text">
@@ -221,7 +212,8 @@ $notify_count = User::CountNotification($user_id);
 
                         <label>
 
-                          <textarea class="text-whathappen" name="status" rows="8" cols="80" placeholder="What's happening?"></textarea>
+                          <textarea class="text-whathappen" name="status" rows="8" cols="80"
+                            placeholder="What's happening?"></textarea>
 
                         </label>
                       </div>
@@ -263,10 +255,12 @@ $notify_count = User::CountNotification($user_id);
                           foreach ($_SESSION['errors_tweet'] as $t) { ?>
 
                             <div class="alert alert-danger">
-                              <span class="item2-pair"> <?php echo $t; ?> </span>
+                              <span class="item2-pair">
+                                <?php echo $t; ?>
+                              </span>
                             </div>
 
-                        <?php }
+                          <?php }
                         }
                         unset($_SESSION['errors_tweet']); ?>
                         <div>
@@ -278,18 +272,12 @@ $notify_count = User::CountNotification($user_id);
                     </form>
                   </div>
                 </div>
-                <div class="part-2">
-
-                </div>
 
               </div>
 
 
             </div>
           </div>
-          <!-- <div class="mt-icon-settings">
-              <img src="https://i.ibb.co/W5T9ycN/settings.png" alt="" />
-            </div> -->
         </div>
         <div class="box-fixed" id="box-fixed"></div>
 
@@ -322,38 +310,34 @@ $notify_count = User::CountNotification($user_id);
           foreach ($who_users as $user) {
             //  $u = User::getData($user->user_id);
             $user_follow = Follow::isUserFollow($user_id, $user->id);
-          ?>
+            ?>
             <div class="grid-share">
-              <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
-                <img
-                  src="assets/images/users/<?php echo $user->img; ?>"
-                  alt=""
-                  class="img-share" />
+              <a style="position: relative; z-index:5; color:black"
+                href="/profile.php?username=<?php echo $user->username; ?>">
+                <img src="assets/images/users/<?php echo $user->img; ?>" alt="" class="img-share" />
               </a>
               <div>
                 <p>
-                  <a style="position: relative; z-index:5; color:black" href="<?php echo $user->username;  ?>">
+                  <a style="position: relative; z-index:5; color:black"
+                    href="/profile.php?username=<?php echo $user->username; ?>">
                     <strong><?php echo $user->name; ?></strong>
                   </a>
                 </p>
                 <p class="username">@<?php echo $user->username; ?>
                   <?php if (Follow::FollowsYou($user->id, $user_id)) { ?>
                     <span class="ml-1 follows-you">Follows You</span>
-                </p>
-              <?php } ?></p>
+                  </p>
+                <?php } ?></p>
               </div>
               <div>
                 <button class="follow-btn follow-btn-m 
-                      <?= $user_follow ? 'following' : 'follow' ?>"
-                  data-follow="<?php echo $user->id; ?>"
-                  data-user="<?php echo $user_id; ?>"
-                  data-profile="<?php echo $u_id; ?>"
-                  style="font-weight: 700;">
+                      <?= $user_follow ? 'following' : 'follow' ?>" data-follow="<?php echo $user->id; ?>"
+                  data-user="<?php echo $user_id; ?>" data-profile="<?php echo $u_id; ?>" style="font-weight: 700;">
                   <?php if ($user_follow) { ?>
                     Following
-                  <?php } else {  ?>
+                  <?php } else { ?>
                     Follow
-                  <?php }  ?>
+                  <?php } ?>
                 </button>
               </div>
             </div>
