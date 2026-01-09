@@ -3,7 +3,7 @@
 // try for connect with class
 
 class Connect {
-    protected static $servername = "localhost:3307";
+    protected static $servername = "localhost:3306";
     protected static $db_name="twitter";
     protected static $username = "root";
     protected static $password = "";

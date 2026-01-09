@@ -53,7 +53,7 @@
             display: flex;
             flex-direction: column;
             transition: 0.35s ease;
-            z-index: 998;
+            z-index: 99999;
         }
 
         .chatbot.open {
@@ -347,7 +347,6 @@
 <button class="dark-toggle">
     <i class="fa-solid fa-moon"></i>
 </button>
-<script src="./index.js"></script>
 
 <body>
 
@@ -458,70 +457,93 @@
     </div>
 
 
-    <!-- ===== MESSAGE BUTTON ===== -->
+    <!-- BUTTON -->
     <button class="chat-toggle" onclick="toggleChat()">
         <i class="fa-solid fa-message"></i>
     </button>
 
-    <!-- ===== CHATBOT ===== -->
+    <!-- CHATBOX -->
     <div class="chatbot" id="chatbot">
         <div class="chat-header">
             <span>🤖 AI Support</span>
-            <i class="fa-solid fa-xmark" style="cursor:pointer" onclick="toggleChat()"></i>
+            <i class="fa-solid fa-xmark" onclick="toggleChat()" style="cursor:pointer"></i>
         </div>
 
         <div class="chat-messages" id="messages">
-            <div class="msg bot">Hello 👋 I'm your AI assistant. How can I help you today?</div>
+            <div class="msg bot">Hello 👋 Tôi có thể giúp gì cho bạn?</div>
         </div>
 
         <div class="chat-input">
-            <input type="text" id="input" placeholder="Type a message..." />
+            <input type="text" id="input" placeholder="Nhập tin nhắn..." />
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
 
-    <?php include 'partials/footer.php'; ?>
-
     <script>
-        const chatbot = document.getElementById("chatbot");
-        const messages = document.getElementById("messages");
-        const input = document.getElementById("input");
+        /* ================= CONFIG ================= */
+        const API_URL = "http://127.0.0.1:8000/chat";
+        const USER_ID = "guest_web";
 
-        function toggleChat() {
+        /* ================= UI ================= */
+        window.toggleChat = function() {
+            const chatbot = document.getElementById("chatbot");
             chatbot.classList.toggle("open");
-        }
+        };
 
-        function sendMessage() {
-            if (!input.value.trim()) return;
-
-            addMessage(input.value, "user");
-            const userText = input.value;
-            input.value = "";
-
-            setTimeout(() => {
-                addMessage(botReply(userText), "bot");
-            }, 800);
-        }
-
+        /* ================= MESSAGE ================= */
         function addMessage(text, type) {
+            const messages = document.getElementById("messages");
             const div = document.createElement("div");
             div.className = "msg " + type;
-            div.innerText = text;
+            div.textContent = text;
             messages.appendChild(div);
             messages.scrollTop = messages.scrollHeight;
         }
 
-        function botReply(text) {
-            text = text.toLowerCase();
+        /* ================= SEND ================= */
+        window.sendMessage = async function() {
+            const input = document.getElementById("input");
+            const messages = document.getElementById("messages");
+            const text = input.value.trim();
+            if (!text) return;
 
-            if (text.includes("login")) return "If you have login issues, try resetting your password or clearing cookies.";
-            if (text.includes("signup")) return "You can create an account by clicking Sign Up on the homepage.";
-            if (text.includes("privacy")) return "Your privacy is important. Visit the Privacy Policy page for full details.";
-            if (text.includes("hello")) return "Hello 👋 How can I assist you?";
-            return "Thanks for your message! Our AI is learning and will assist you better soon 😊";
-        }
+            addMessage(text, "user");
+            input.value = "";
+
+            const loading = document.createElement("div");
+            loading.className = "msg bot";
+            loading.textContent = "🤖 Đang suy nghĩ...";
+            messages.appendChild(loading);
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        user_id: USER_ID,
+                        message: text
+                    })
+                });
+
+                const data = await res.json();
+                messages.removeChild(loading);
+                addMessage(data.response || "Không có phản hồi", "bot");
+
+            } catch (e) {
+                messages.removeChild(loading);
+                addMessage("❌ Không kết nối được AI server", "bot");
+                console.error(e);
+            }
+        };
+
+        /* ================= ENTER ================= */
+        document.getElementById("input").addEventListener("keypress", e => {
+            if (e.key === "Enter") sendMessage();
+        });
     </script>
-
 </body>
 
 </html>
